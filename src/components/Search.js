@@ -5,8 +5,6 @@ const Search = () => {
   const [term, setTerm] = useState("programming");
   const [results, setResults] = useState([]);
 
-  console.log(results);
-
   useEffect(() => {
     const search = async () => {
       const { data } = await axios.get("https://en.wikipedia.org/w/api.php", {
@@ -22,7 +20,13 @@ const Search = () => {
       setResults(data.query.search);
     };
 
-    if (term) search();
+    const timeOutId = setTimeout(() => {
+      if (term) search();
+    }, 500);
+
+    return () => {
+      clearTimeout(timeOutId);
+    };
   }, [term]);
 
   const renderedResults = results.map((result) => {
