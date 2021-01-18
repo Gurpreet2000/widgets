@@ -37,16 +37,21 @@ const App = () => {
   const [showDropdown, setShowDropdown] = useState(true);
 
   return (
-    <div>
+    <div className="ui container">
       <button onClick={() => setShowDropdown(!showDropdown)}>
         Toggle Dropdown
       </button>
       {showDropdown ? (
-        <Dropdown
-          selected={selected}
-          onSelectedChange={setSelected}
-          options={options}
-        />
+        <div>
+          <Dropdown
+            selected={selected}
+            onSelectedChange={setSelected}
+            options={options}
+          />
+          <h3 style={{ color: selected.value }}>
+            This text is {selected.value}
+          </h3>
+        </div>
       ) : null}
     </div>
   );
